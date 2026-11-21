@@ -1,0 +1,31 @@
+CMD schematize-connectors
+  SOBRE schematize connectors: MCP connector catalog with a read-only preview
+  ARG lang                 --lang
+  ARG sem_anuncios         --sem-anuncios
+CMD schematize-connectors anuncios
+  SOBRE Audit what ad the current context would show, and why not (informational only)
+  ARG json                 --json
+  ARG slot                 --slot
+CMD schematize-connectors diag
+  SOBRE Catalog sizes/order, validation of every connector, opt-out and tty state
+  ARG json                 --json
+CMD schematize-connectors disable
+  SOBRE Print the command to remove a connector. --aplicar runs it (claude-code only)
+  ARG aplicar              --aplicar
+  ARG cliente              --cliente
+  ARG id                    OBRIGATORIO
+  ARG json                 --json
+CMD schematize-connectors enable
+  SOBRE Print the exact command/snippet to enable a connector. --aplicar runs it (claude-code only)
+  ARG aplicar              --aplicar
+  ARG cliente              --cliente
+  ARG id                    OBRIGATORIO
+  ARG json                 --json
+CMD schematize-connectors list
+  SOBRE List the connectors (main one first) with their status
+  ARG json                 --json
+CMD schematize-connectors preview
+  SOBRE Show a connector's tools. Offline by default; --ao-vivo asks the server (read-only)
+  ARG ao_vivo              --ao-vivo
+  ARG id                    OBRIGATORIO
+  ARG json                 --json

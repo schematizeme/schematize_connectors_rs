@@ -9,7 +9,6 @@ license = "MIT"
 name = "connectors"
 path = "src/lib.rs"
 
-# O binário nasce com a CLI (U3); até lá o `main.rs` é só um stub.
 [[bin]]
 name = "schematize-connectors"
 path = "src/main.rs"
@@ -17,6 +16,7 @@ path = "src/main.rs"
 [dependencies]
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
+clap = { version = "4", default-features = false, features = ["std", "derive", "help", "usage", "error-context", "suggestions"] }
 
 # Perfil IDÊNTICO ao dos outros repos do app: o install.sh compila todos com um
 # `CARGO_TARGET_DIR` único, e cargo só reaproveita artefato se o perfil bater EXATAMENTE.
