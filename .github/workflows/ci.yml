@@ -1,0 +1,25 @@
+name: ci
+
+# Gate por commit é LOCAL (tools/ci.sh / cargo). O CI remoto roda 1x antes do hml:
+# a pedido (workflow_dispatch) ou em tag. Nunca em pull_request nem push de branch.
+on:
+  workflow_dispatch:
+  push:
+    tags: ["hml-*", "v*"]
+
+concurrency:
+  group: ci-}
+  cancel-in-progress: true
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy, rustfmt
+      - run: cargo fmt --check
+      - run: cargo clippy --all-targets -- -D warnings
+      - run: cargo test --all-targets
+      - run: cargo build --locked

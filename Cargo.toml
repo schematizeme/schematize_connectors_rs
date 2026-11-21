@@ -1,0 +1,27 @@
+[package]
+name = "schematize-connectors"
+version = "0.1.0"
+edition = "2021"
+description = "schematize connectors: catálogo de conectores MCP com prévia e anúncios da casa. Lógica pura, sem rede."
+license = "MIT"
+
+[lib]
+name = "connectors"
+path = "src/lib.rs"
+
+# O binário nasce com a CLI (U3); até lá o `main.rs` é só um stub.
+[[bin]]
+name = "schematize-connectors"
+path = "src/main.rs"
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# Perfil IDÊNTICO ao dos outros repos do app: o install.sh compila todos com um
+# `CARGO_TARGET_DIR` único, e cargo só reaproveita artefato se o perfil bater EXATAMENTE.
+# Qualquer divergência aqui parte o cache compartilhado.
+[profile.release]
+strip = true
+opt-level = 3
+lto = "thin"
